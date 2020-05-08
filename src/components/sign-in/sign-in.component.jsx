@@ -2,6 +2,8 @@ import React from 'react';
 import './sign-in.style.scss';
 import InputForm from '../input-form/input-form.component';
 import CustomButton from '../custom-button/custom-button.component';
+import { signInWhithGoogle } from '../../firebase/firebase.utils';
+
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -44,9 +46,11 @@ class SignIn extends React.Component {
                     label="Password"
                     value={this.state.password} 
                     required/>
-                    <CustomButton type="submit" >
-                        Sign In
-                    </CustomButton>
+                    <div className='button'>
+                        <CustomButton type="submit" >Sign In </CustomButton>
+                        <CustomButton onClick={signInWhithGoogle} isGoogleSignIn >Sign In With Google</CustomButton>
+                    </div>
+                    
                 </form>
             </div>
         )
