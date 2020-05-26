@@ -13,14 +13,15 @@ import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.com
 import { connect } from 'react-redux';
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-
+import { checkUserSession } from "./redux/user/user.actions";
 
 class App extends React.Component  {
    
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const {setCurrentUser} = this.props;
+    const {checkUserSession} = this.props;
+    checkUserSession();
 
     // this.unsubscribeFromAuth = auth.onAuthStateChanged( async (userAuth) => {
     //   //this.setState({ currentUser: user});
@@ -75,6 +76,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
+const mapDispatchToProps = dispatch => ({
+  checkUserSession: () => dispatch(checkUserSession())
+})
 
-
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
