@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 
@@ -15,40 +15,44 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
 
-class App extends React.Component  {
+const App = ({currentUser , checkUserSession}) =>  {
    
-  unsubscribeFromAuth = null;
+  //unsubscribeFromAuth = null;
+  
+  useEffect(() => {
+    checkUserSession()
+  }, [checkUserSession])
 
-  componentDidMount() {
-    const {checkUserSession} = this.props;
-    checkUserSession();
+  // componentDidMount() {
+  //   const {checkUserSession} = this.props;
+  //   checkUserSession();
 
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged( async (userAuth) => {
-    //   //this.setState({ currentUser: user});
+  //   // this.unsubscribeFromAuth = auth.onAuthStateChanged( async (userAuth) => {
+  //   //   //this.setState({ currentUser: user});
       
-    //   if(userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
+  //   //   if(userAuth) {
+  //   //     const userRef = await createUserProfileDocument(userAuth);
  
-    //     userRef.onSnapshot(snapShot => {
-    //       setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data()
-    //       })
-    //     });
-    //   } else {
-    //     setCurrentUser( userAuth );
-    //   }
-    //   // Data to Firebase
-    //   // addCollectionAndDocuments('collections', collectionsArray.map(({ title, items }) => ({ title, items })))
+  //   //     userRef.onSnapshot(snapShot => {
+  //   //       setCurrentUser({
+  //   //         id: snapShot.id,
+  //   //         ...snapShot.data()
+  //   //       })
+  //   //     });
+  //   //   } else {
+  //   //     setCurrentUser( userAuth );
+  //   //   }
+  //   //   // Data to Firebase
+  //   //   // addCollectionAndDocuments('collections', collectionsArray.map(({ title, items }) => ({ title, items })))
 
-    // })
-  }
+  //   // })
+  // }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
 
-  render() {
+
     return (
       <div>
         <BrowserRouter>
@@ -58,7 +62,7 @@ class App extends React.Component  {
           <Route  path='/shop' component={ShopPage}/>
           <Route  path='/checkout' component={CheckoutPage}/>
           <Route  exact path='/signin' render = {() => 
-            this.props.currentUser ? (
+            currentUser ? (
               <Redirect to='/' />
             ) : (
               <SignInAndSignUp />
@@ -68,7 +72,7 @@ class App extends React.Component  {
         </BrowserRouter>
       </div>
     );
-  }
+  
   
 }
 
