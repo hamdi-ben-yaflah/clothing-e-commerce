@@ -1,5 +1,5 @@
 import React from 'react';
-import StripeCheckout from 'react-stripe-checkout';
+// import StripeCheckout from 'react-stripe-checkout';
 
 
 function StripeCheckoutButton({ price }) {
@@ -11,20 +11,20 @@ function StripeCheckoutButton({ price }) {
     alert('Payment Successful')
     }
     return (
-        <StripeCheckout
-            label="Pay Now"
-            name= "Clothing E-commerce"
-            billingAddress
-            shippingAddress
-            image='http://svgshare.com/i/CUz.svg'
-            description={`Your total is $${price}`}
-            amount={priceForStripe}
-            panelLabel="Pay Now"
-            token={onToken}
-            stripeKey={publishableKey}
-        />
+        // <StripeCheckout
+        //     label="Pay Now"
+        //     name= "Clothing E-commerce"
+        //     billingAddress
+        //     shippingAddress
+        //     image='http://svgshare.com/i/CUz.svg'
+        //     description={`Your total is $${price}`}
+        //     amount={priceForStripe}
+        //     panelLabel="Pay Now"
+        //     token={onToken}
+        //     stripeKey={publishableKey}
+        // />
             
-        
+        <h1>aze</h1>
     );
 }
 
